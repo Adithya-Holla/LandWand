@@ -1,49 +1,185 @@
-# Getting Started with Create React App
+# LandWand Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React.js frontend application for land and property management.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Modern Dashboard**: Comprehensive dashboard with property analytics and management
+- **Responsive Design**: Mobile-first design using Tailwind CSS
+- **Property Management**: Add, view, edit, and manage land properties
+- **Search & Filter**: Advanced search and filtering capabilities
+- **Analytics**: Property performance tracking and insights
+- **Routing**: Multi-page application with React Router DOM
 
-### `npm start`
+## 🛠️ Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19.2.0** - UI framework
+- **React Router DOM 7.9.4** - Client-side routing
+- **Tailwind CSS 4.1.16** - Utility-first CSS framework
+- **Axios 1.12.2** - HTTP client for API calls
+- **Create React App** - Build tooling and development environment
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Installation
 
-### `npm test`
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🏗️ Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── components/          # Reusable React components
+│   ├── Card.jsx        # Property cards and stat cards
+│   ├── Footer.jsx      # Footer component
+│   └── Navbar.jsx      # Navigation bar
+├── pages/              # Page components
+│   ├── Dashboard.jsx   # Main dashboard page
+│   ├── Details.jsx     # Property details page
+│   └── home.jsx        # Landing page
+├── App.js              # Main application component
+├── App.css             # Custom styles
+├── index.js            # React DOM entry point
+└── index.css           # Global styles with Tailwind
+```
 
-### `npm run eject`
+## 📱 Pages Overview
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Home Page (`/`)
+- Landing page with hero section
+- Feature highlights
+- Call-to-action sections
+- Company statistics
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Dashboard (`/dashboard`)
+- **Overview Tab**: Key statistics and recent activity
+- **Properties Tab**: Property grid with search and filtering
+- **Analytics Tab**: Performance charts and insights
+- Responsive design for all screen sizes
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Property Details (`/details/:id`)
+- Detailed property information
+- Image gallery placeholder
+- Owner contact information
+- Property specifications
+- Location connectivity details
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🎨 Design System
 
-## Learn More
+### Colors
+- **Primary Green**: `#16a34a` (green-600)
+- **Light Green**: `#22c55e` (green-500)
+- **Dark Green**: `#15803d` (green-700)
+- **Gray Scale**: Various shades for backgrounds and text
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Components
+- **Cards**: Modular card components for properties and statistics
+- **Buttons**: Primary, secondary, and outline button styles
+- **Forms**: Consistent input and select styling
+- **Navigation**: Responsive navbar with mobile menu
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔧 Available Scripts
+
+### Development
+```bash
+npm start          # Start development server
+npm test           # Run test suite
+npm run build      # Build for production
+npm run eject      # Eject from Create React App
+```
+
+### Linting and Formatting
+```bash
+npm run lint       # Run ESLint (if configured)
+npm run format     # Format code (if configured)
+```
+
+## 🌐 API Integration
+
+The frontend is prepared for backend integration with:
+- Axios HTTP client configured
+- Mock data structure in place
+- API call patterns established
+- Error handling prepared
+
+### Expected API Endpoints
+```
+GET    /api/properties     # Fetch all properties
+GET    /api/properties/:id # Fetch single property
+POST   /api/properties     # Create new property
+PUT    /api/properties/:id # Update property
+DELETE /api/properties/:id # Delete property
+GET    /api/stats          # Dashboard statistics
+```
+
+## 📊 Mock Data Structure
+
+### Property Object
+```javascript
+{
+  id: 1,
+  name: "Green Valley Estate",
+  location: "North Bangalore",
+  area: "2.5 acres",
+  type: "Residential",
+  status: "Available",
+  price: "₹45,00,000",
+  description: "...",
+  features: [...],
+  specifications: {...},
+  owner: {...}
+}
+```
+
+## 🎯 Future Enhancements
+
+- [ ] User authentication system
+- [ ] Real-time notifications
+- [ ] Advanced filtering options
+- [ ] Map integration for property locations
+- [ ] Image upload and gallery
+- [ ] PDF report generation
+- [ ] Mobile app using React Native
+- [ ] Dark mode theme
+
+## 🐛 Known Issues
+
+- Tailwind CSS configuration needs backend setup completion
+- Image placeholders need real image integration
+- Some interactive features need backend API
+
+## 🤝 Development Guidelines
+
+1. **Component Structure**: Keep components modular and reusable
+2. **Styling**: Use Tailwind CSS classes consistently
+3. **State Management**: Use React hooks for local state
+4. **API Calls**: Implement proper error handling
+5. **Responsive Design**: Test on multiple screen sizes
+6. **Performance**: Optimize bundle size and loading times
+
+## 📞 Support
+
+For development support or questions, please refer to:
+- React documentation: https://reactjs.org/
+- Tailwind CSS docs: https://tailwindcss.com/
+- React Router docs: https://reactrouter.com/
+
+---
+
+Built with ❤️ for efficient land management
 
 ### Code Splitting
 
