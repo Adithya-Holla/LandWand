@@ -7,17 +7,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        green: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+        // Dark theme color palette
+        dark: {
+          bg: '#0f172a',        // Deep background (slate-900)
+          card: '#1e293b',      // Card background (slate-800)
+          hover: '#334155',     // Hover state (slate-700)
+          border: '#334155',    // Borders (slate-700)
+          text: '#f1f5f9',      // Primary text (slate-100)
+          'text-secondary': '#94a3b8',  // Secondary text (slate-400)
+          'text-muted': '#64748b',      // Muted text (slate-500)
+        },
+        primary: {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',  // Main teal accent
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+        },
+        accent: {
+          cyan: '#06b6d4',
+          teal: '#14b8a6',
+          emerald: '#10b981',
         }
       },
       fontFamily: {

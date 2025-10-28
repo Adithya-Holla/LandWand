@@ -5,26 +5,26 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-dark-card border-t border-dark-border text-dark-text">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-cyan rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">L</span>
               </div>
               <span className="text-xl font-bold">LandWand</span>
             </div>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="text-dark-text-secondary mb-6 max-w-md">
               Your complete solution for land and property management. Streamline operations, 
               track performance, and make data-driven decisions with ease.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-green-400 transition-colors"
+                className="text-dark-text-secondary hover:text-primary-400 transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-green-400 transition-colors"
+                className="text-dark-text-secondary hover:text-primary-400 transition-colors"
                 aria-label="Twitter"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-green-400 transition-colors"
+                className="text-dark-text-secondary hover:text-primary-400 transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-green-400 transition-colors"
+                className="text-dark-text-secondary hover:text-primary-400 transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -66,27 +66,27 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-300 hover:text-green-400 transition-colors">
+                <Link to="/" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="text-gray-300 hover:text-green-400 transition-colors">
+                <Link to="/dashboard" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Dashboard
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Services
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Contact
                 </a>
               </li>
@@ -98,27 +98,27 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Help Center
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   API Reference
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Community
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="#" className="text-dark-text-secondary hover:text-primary-400 transition-colors">
                   Status Page
                 </a>
               </li>
@@ -127,19 +127,19 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Signup */}
-        <div className="border-t border-gray-800 py-8">
+        <div className="border-t border-dark-border py-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="mb-4 md:mb-0">
               <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
-              <p className="text-gray-300">Get the latest updates and news about LandWand.</p>
+              <p className="text-dark-text-secondary">Get the latest updates and news about LandWand.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 max-w-md">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent flex-1"
+                className="px-4 py-2 bg-dark-bg border border-dark-border rounded-lg text-dark-text placeholder-dark-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent flex-1"
               />
-              <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap">
+              <button className="bg-gradient-to-r from-primary-500 to-accent-cyan text-white px-6 py-2 rounded-lg hover:from-primary-600 hover:to-primary-500 transition-all whitespace-nowrap shadow-lg shadow-primary-500/20">
                 Subscribe
               </button>
             </div>
@@ -147,19 +147,19 @@ const Footer = () => {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-gray-800 py-6">
+        <div className="border-t border-dark-border py-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <p className="text-gray-400 text-sm">
+            <p className="text-dark-text-secondary text-sm">
               © {currentYear} LandWand. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-green-400 text-sm transition-colors">
+              <a href="#" className="text-dark-text-secondary hover:text-primary-400 text-sm transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-green-400 text-sm transition-colors">
+              <a href="#" className="text-dark-text-secondary hover:text-primary-400 text-sm transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-green-400 text-sm transition-colors">
+              <a href="#" className="text-dark-text-secondary hover:text-primary-400 text-sm transition-colors">
                 Cookie Policy
               </a>
             </div>

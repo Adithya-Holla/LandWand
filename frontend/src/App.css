@@ -4,8 +4,8 @@
 .loading-spinner {
   animation: spin 1s linear infinite;
   border-radius: 50%;
-  border: 2px solid #d1d5db;
-  border-top-color: #16a34a;
+  border: 2px solid #334155;
+  border-top-color: #14b8a6;
 }
 
 @keyframes spin {

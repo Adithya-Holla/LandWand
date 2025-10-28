@@ -87,10 +87,10 @@ const Details = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading property details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+          <p className="text-dark-text-secondary">Loading property details...</p>
         </div>
       </div>
     );
@@ -98,14 +98,14 @@ const Details = () => {
 
   if (!property) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl text-gray-400 mb-4">🏠</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Property Not Found</h2>
-          <p className="text-gray-600 mb-6">The property you're looking for doesn't exist or has been removed.</p>
+          <div className="text-6xl text-dark-text-muted mb-4">🏠</div>
+          <h2 className="text-2xl font-bold text-dark-text mb-2">Property Not Found</h2>
+          <p className="text-dark-text-secondary mb-6">The property you're looking for doesn't exist or has been removed.</p>
           <button
             onClick={() => navigate('/dashboard')}
-            className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+            className="bg-gradient-to-r from-primary-500 to-accent-cyan text-white px-6 py-2 rounded-lg hover:from-primary-600 hover:to-primary-500 transition-all shadow-lg shadow-primary-500/20"
           >
             Back to Dashboard
           </button>
@@ -115,20 +115,20 @@ const Details = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-dark-bg">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
+      <div className="bg-dark-card shadow-sm border-b border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigate('/dashboard')}
-              className="text-gray-600 hover:text-green-600 flex items-center space-x-2"
+              className="text-dark-text-secondary hover:text-primary-400 flex items-center space-x-2 transition-colors"
             >
               <span>←</span>
               <span>Back to Dashboard</span>
             </button>
-            <span className="text-gray-300">|</span>
-            <span className="text-gray-600">Property Details</span>
+            <span className="text-dark-border">|</span>
+            <span className="text-dark-text-secondary">Property Details</span>
           </div>
         </div>
       </div>
@@ -138,9 +138,9 @@ const Details = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Property Images */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-dark-card rounded-lg shadow-lg overflow-hidden border border-dark-border">
               <div className="relative">
-                <div className="h-96 bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center">
+                <div className="h-96 bg-gradient-to-r from-primary-600 to-accent-cyan flex items-center justify-center">
                   <div className="text-center text-white">
                     <div className="text-6xl mb-4">🏞️</div>
                     <p className="text-lg">Property Image Placeholder</p>
@@ -152,50 +152,50 @@ const Details = () => {
                 <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                     property.status === 'Available' 
-                      ? 'bg-green-100 text-green-800' 
+                      ? 'bg-primary-500/20 text-primary-300 border border-primary-500/30' 
                       : property.status === 'Sold'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-yellow-100 text-yellow-800'
+                      ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                      : 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30'
                   }`}>
                     {property.status}
                   </span>
                 </div>
 
                 {/* View Count */}
-                <div className="absolute top-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                <div className="absolute top-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm">
                   👁️ {property.viewCount} views
                 </div>
               </div>
             </div>
 
             {/* Property Information */}
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-dark-card rounded-lg shadow-lg p-6 border border-dark-border">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6">
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">{property.name}</h1>
-                  <p className="text-gray-600 flex items-center space-x-2">
+                  <h1 className="text-3xl font-bold text-dark-text mb-2">{property.name}</h1>
+                  <p className="text-dark-text-secondary flex items-center space-x-2">
                     <span>📍</span>
                     <span>{property.location}</span>
                   </p>
                 </div>
                 <div className="mt-4 sm:mt-0 text-right">
-                  <div className="text-3xl font-bold text-green-600">{property.price}</div>
-                  <div className="text-sm text-gray-600">{property.pricePerAcre} per acre</div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">{property.price}</div>
+                  <div className="text-sm text-dark-text-secondary">{property.pricePerAcre} per acre</div>
                 </div>
               </div>
 
-              <div className="border-t pt-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Description</h2>
-                <p className="text-gray-700 leading-relaxed mb-6">
+              <div className="border-t border-dark-border pt-6">
+                <h2 className="text-xl font-semibold text-dark-text mb-4">Description</h2>
+                <p className="text-dark-text-secondary leading-relaxed mb-6">
                   {property.description}
                 </p>
 
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h2>
+                <h2 className="text-xl font-semibold text-dark-text mb-4">Key Features</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {property.features.map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <span className="text-green-600">✓</span>
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-primary-400">✓</span>
+                      <span className="text-dark-text-secondary">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -203,26 +203,26 @@ const Details = () => {
             </div>
 
             {/* Specifications */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Specifications</h2>
+            <div className="bg-dark-card rounded-lg shadow-lg p-6 border border-dark-border">
+              <h2 className="text-xl font-semibold text-dark-text mb-6">Specifications</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(property.specifications).map(([key, value]) => (
-                  <div key={key} className="flex justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium text-gray-700">{key}</span>
-                    <span className="text-gray-900">{value}</span>
+                  <div key={key} className="flex justify-between p-3 bg-dark-hover rounded-lg">
+                    <span className="font-medium text-dark-text-secondary">{key}</span>
+                    <span className="text-dark-text">{value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Location Details */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Location & Connectivity</h2>
+            <div className="bg-dark-card rounded-lg shadow-lg p-6 border border-dark-border">
+              <h2 className="text-xl font-semibold text-dark-text mb-6">Location & Connectivity</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(property.location_details).map(([key, value]) => (
-                  <div key={key} className="flex justify-between items-center p-3 border border-gray-200 rounded-lg">
-                    <span className="text-gray-700">{key}</span>
-                    <span className="font-medium text-gray-900">{value}</span>
+                  <div key={key} className="flex justify-between items-center p-3 border border-dark-border rounded-lg">
+                    <span className="text-dark-text-secondary">{key}</span>
+                    <span className="font-medium text-dark-text">{value}</span>
                   </div>
                 ))}
               </div>
@@ -232,18 +232,18 @@ const Details = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Contact Card */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Owner</h3>
+            <div className="bg-dark-card rounded-lg shadow-lg p-6 border border-dark-border">
+              <h3 className="text-lg font-semibold text-dark-text mb-4">Contact Owner</h3>
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-gray-600">Owner</p>
-                  <p className="font-medium text-gray-900">{property.owner.name}</p>
+                  <p className="text-sm text-dark-text-muted">Owner</p>
+                  <p className="font-medium text-dark-text">{property.owner.name}</p>
                 </div>
                 
                 <div className="space-y-2">
                   <button
                     onClick={handleCallOwner}
-                    className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full bg-gradient-to-r from-primary-500 to-accent-cyan text-white py-2 px-4 rounded-lg hover:from-primary-600 hover:to-primary-500 transition-all flex items-center justify-center space-x-2 shadow-lg shadow-primary-500/20"
                   >
                     <span>📞</span>
                     <span>Call Owner</span>
@@ -251,7 +251,7 @@ const Details = () => {
                   
                   <button
                     onClick={handleEmailOwner}
-                    className="w-full border border-green-600 text-green-600 py-2 px-4 rounded-lg hover:bg-green-50 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full border border-primary-500 text-primary-400 py-2 px-4 rounded-lg hover:bg-primary-500/10 transition-colors flex items-center justify-center space-x-2"
                   >
                     <span>✉️</span>
                     <span>Email Owner</span>
@@ -259,7 +259,7 @@ const Details = () => {
                   
                   <button
                     onClick={handleInquiry}
-                    className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full border border-dark-border text-dark-text-secondary py-2 px-4 rounded-lg hover:bg-dark-hover transition-colors flex items-center justify-center space-x-2"
                   >
                     <span>❓</span>
                     <span>Send Inquiry</span>
@@ -269,42 +269,42 @@ const Details = () => {
             </div>
 
             {/* Property Stats */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Property Stats</h3>
+            <div className="bg-dark-card rounded-lg shadow-lg p-6 border border-dark-border">
+              <h3 className="text-lg font-semibold text-dark-text mb-4">Property Stats</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Total Views</span>
-                  <span className="font-medium text-gray-900">{property.viewCount}</span>
+                  <span className="text-dark-text-secondary">Total Views</span>
+                  <span className="font-medium text-dark-text">{property.viewCount}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Inquiries</span>
-                  <span className="font-medium text-gray-900">{property.inquiries}</span>
+                  <span className="text-dark-text-secondary">Inquiries</span>
+                  <span className="font-medium text-dark-text">{property.inquiries}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Last Updated</span>
-                  <span className="font-medium text-gray-900">{property.lastUpdated}</span>
+                  <span className="text-dark-text-secondary">Last Updated</span>
+                  <span className="font-medium text-dark-text">{property.lastUpdated}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Property ID</span>
-                  <span className="font-medium text-gray-900">#{property.id.toString().padStart(6, '0')}</span>
+                  <span className="text-dark-text-secondary">Property ID</span>
+                  <span className="font-medium text-dark-text">#{property.id.toString().padStart(6, '0')}</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+            <div className="bg-dark-card rounded-lg shadow-lg p-6 border border-dark-border">
+              <h3 className="text-lg font-semibold text-dark-text mb-4">Quick Actions</h3>
               <div className="space-y-2">
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-dark-text-secondary hover:bg-dark-hover hover:text-dark-text rounded-lg transition-colors">
                   📤 Share Property
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-dark-text-secondary hover:bg-dark-hover hover:text-dark-text rounded-lg transition-colors">
                   ❤️ Add to Favorites
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-dark-text-secondary hover:bg-dark-hover hover:text-dark-text rounded-lg transition-colors">
                   📊 View Analytics
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-dark-text-secondary hover:bg-dark-hover hover:text-dark-text rounded-lg transition-colors">
                   ✏️ Edit Property
                 </button>
               </div>

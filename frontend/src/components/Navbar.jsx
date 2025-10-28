@@ -8,16 +8,16 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200">
+    <nav className="bg-dark-card shadow-lg border-b border-dark-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Brand */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-cyan rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">L</span>
               </div>
-              <span className="text-xl font-bold text-gray-800">LandWand</span>
+              <span className="text-xl font-bold text-dark-text">LandWand</span>
             </Link>
           </div>
 
@@ -27,8 +27,8 @@ const Navbar = () => {
               to="/"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive('/')
-                  ? 'text-green-600 bg-green-50'
-                  : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
+                  ? 'text-primary-400 bg-dark-hover'
+                  : 'text-dark-text-secondary hover:text-primary-400 hover:bg-dark-hover'
               }`}
             >
               Home
@@ -37,8 +37,8 @@ const Navbar = () => {
               to="/dashboard"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive('/dashboard')
-                  ? 'text-green-600 bg-green-50'
-                  : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
+                  ? 'text-primary-400 bg-dark-hover'
+                  : 'text-dark-text-secondary hover:text-primary-400 hover:bg-dark-hover'
               }`}
             >
               Dashboard
@@ -46,7 +46,7 @@ const Navbar = () => {
             
             {/* User Menu */}
             <div className="flex items-center space-x-4">
-              <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors">
+              <button className="bg-gradient-to-r from-primary-500 to-accent-cyan text-white px-4 py-2 rounded-md text-sm font-medium hover:from-primary-600 hover:to-primary-500 transition-all shadow-lg shadow-primary-500/20">
                 Sign In
               </button>
             </div>
@@ -56,7 +56,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-green-600 focus:outline-none focus:text-green-600"
+              className="text-dark-text-secondary hover:text-primary-400 focus:outline-none focus:text-primary-400"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
@@ -72,13 +72,13 @@ const Navbar = () => {
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-dark-border">
               <Link
                 to="/"
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                   isActive('/')
-                    ? 'text-green-600 bg-green-50'
-                    : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
+                    ? 'text-primary-400 bg-dark-hover'
+                    : 'text-dark-text-secondary hover:text-primary-400 hover:bg-dark-hover'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -88,14 +88,14 @@ const Navbar = () => {
                 to="/dashboard"
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                   isActive('/dashboard')
-                    ? 'text-green-600 bg-green-50'
-                    : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
+                    ? 'text-primary-400 bg-dark-hover'
+                    : 'text-dark-text-secondary hover:text-primary-400 hover:bg-dark-hover'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Dashboard
               </Link>
-              <button className="w-full text-left bg-green-600 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-green-700 transition-colors">
+              <button className="w-full text-left bg-gradient-to-r from-primary-500 to-accent-cyan text-white px-3 py-2 rounded-md text-base font-medium hover:from-primary-600 hover:to-primary-500 transition-all">
                 Sign In
               </button>
             </div>
