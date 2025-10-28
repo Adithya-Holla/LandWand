@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatCard, PropertyCard } from '../components/Card';
+import { propertyAPI } from '../services/api';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -10,83 +11,58 @@ const Dashboard = () => {
   const [properties, setProperties] = useState([]);
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Mock data - In real app, this would come from API
-  useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setStats({
-        totalProperties: 1247,
-        availableProperties: 892,
-        soldProperties: 234,
-        totalRevenue: '$2.4M'
-      });
-
-      setProperties([
-        {
-          id: 1,
-          name: 'Green Valley Estate',
-          location: 'North Bangalore',
-          area: '2.5 acres',
-          type: 'Residential',
-          status: 'Available',
-          price: '₹45,00,000',
-          lastUpdated: '2 days ago'
-        },
-        {
-          id: 2,
-          name: 'Commercial Hub',
-          location: 'Electronic City',
-          area: '1.8 acres',
-          type: 'Commercial',
-          status: 'Sold',
-          price: '₹1,20,00,000',
-          lastUpdated: '1 week ago'
-        },
-        {
-          id: 3,
-          name: 'Sunset Gardens',
-          location: 'Whitefield',
-          area: '3.2 acres',
-          type: 'Residential',
-          status: 'Available',
-          price: '₹67,50,000',
-          lastUpdated: '5 hours ago'
-        },
-        {
-          id: 4,
-          name: 'Tech Park Land',
-          location: 'Sarjapur',
-          area: '5.0 acres',
-          type: 'Commercial',
-          status: 'Under Review',
-          price: '₹2,50,00,000',
-          lastUpdated: '3 days ago'
-        },
-        {
-          id: 5,
-          name: 'Lakeside Plots',
-          location: 'Hebbal',
-          area: '1.2 acres',
-          type: 'Residential',
-          status: 'Available',
-          price: '₹35,00,000',
-          lastUpdated: '1 day ago'
-        },
-        {
-          id: 6,
-          name: 'Industrial Zone',
-          location: 'Peenya',
-          area: '8.7 acres',
-          type: 'Industrial',
-          status: 'Available',
-          price: '₹4,20,00,000',
-          lastUpdated: '6 hours ago'
-        }
-      ]);
-
+  // Fetch properties from API
+  const fetchProperties = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Fetch properties from backend
+      const response = await propertyAPI.getAll();
+      
+      if (response.status === 'success') {
+        // Transform backend data to match frontend format
+        const transformedProperties = response.data.map(prop => ({
+          id: prop.property_id,
+          name: prop.title,
+          location: `Location ID: ${prop.location_id}`, // We'll enhance this later
+          area: `Property #${prop.property_id}`,
+          type: prop.property_type,
+          status: 'Available', // Default status, will be enhanced with listing data
+          price: `₹${(prop.price / 100000).toFixed(2)}L`,
+          lastUpdated: new Date(prop.posted_date).toLocaleDateString('en-IN')
+        }));
+        
+        setProperties(transformedProperties);
+        
+        // Calculate stats from properties
+        const totalProps = transformedProperties.length;
+        const availableProps = transformedProperties.filter(p => p.status === 'Available').length;
+        const soldProps = transformedProperties.filter(p => p.status === 'Sold').length;
+        const totalRevenue = response.data.reduce((sum, prop) => sum + prop.price, 0);
+        
+        setStats({
+          totalProperties: totalProps,
+          availableProperties: availableProps,
+          soldProperties: soldProps,
+          totalRevenue: `₹${(totalRevenue / 10000000).toFixed(1)}M`
+        });
+      }
+      
       setLoading(false);
-    }, 1000);
+    } catch (err) {
+      console.error('Error fetching properties:', err);
+      setError('Failed to load properties. Please ensure the backend server is running.');
+      setLoading(false);
+    }
+  };
+
+  // Fetch properties on component mount
+  useEffect(() => {
+    fetchProperties();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filteredProperties = properties.filter(property => {
@@ -113,6 +89,22 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-dark-bg">
+      {/* Error Banner */}
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 mx-4 mt-4 rounded-lg flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <span>⚠️</span>
+            <span>{error}</span>
+          </div>
+          <button 
+            onClick={fetchProperties}
+            className="bg-red-500/20 hover:bg-red-500/30 px-3 py-1 rounded text-sm transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-dark-card shadow-sm border-b border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

@@ -1,5 +1,8 @@
-# Documentation
-DOCUMENTATION.md
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
 
 # Dependencies
 node_modules/

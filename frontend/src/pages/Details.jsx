@@ -1,72 +1,88 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { propertyAPI } from '../services/api';
 
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [error, setError] = useState(null);
 
-  // Mock data - In real app, this would come from API
-  useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      const mockProperty = {
-        id: parseInt(id),
-        name: 'Green Valley Estate',
-        location: 'North Bangalore, Karnataka',
-        area: '2.5 acres',
-        type: 'Residential',
-        status: 'Available',
-        price: '₹45,00,000',
-        pricePerAcre: '₹18,00,000',
-        description: 'Beautiful residential land in the heart of North Bangalore. Perfect for building your dream home or investment property. The land features excellent connectivity to major highways and is surrounded by lush greenery.',
-        features: [
-          'Prime location with excellent connectivity',
-          'Clear title and all approvals in place',
-          'Surrounded by developed infrastructure',
-          'Close to schools, hospitals, and shopping centers',
-          'Peaceful and serene environment',
-          'Investment potential with high appreciation'
-        ],
-        specifications: {
-          'Total Area': '2.5 acres',
-          'Plot Type': 'Residential',
-          'Facing': 'North-East',
-          'Road Width': '40 feet',
-          'Electricity': 'Available',
-          'Water Supply': 'Borewell + Corporation',
-          'Approvals': 'BMRDA Approved',
-          'Possession': 'Immediate'
-        },
-        location_details: {
-          'Distance to Airport': '25 km',
-          'Distance to Railway Station': '12 km',
-          'Distance to IT Hub': '18 km',
-          'Distance to Hospital': '3 km',
-          'Distance to School': '1.5 km',
-          'Distance to Mall': '5 km'
-        },
-        images: [
-          '/api/placeholder/600/400',
-          '/api/placeholder/600/400',
-          '/api/placeholder/600/400',
-          '/api/placeholder/600/400'
-        ],
-        owner: {
-          name: 'Rajesh Kumar',
-          phone: '+91 9876543210',
-          email: 'rajesh.kumar@email.com'
-        },
-        lastUpdated: '2 days ago',
-        viewCount: 156,
-        inquiries: 23
-      };
+  // Fetch property from API
+  const fetchProperty = async () => {
+    try {
+      setLoading(true);
+      setError(null);
       
-      setProperty(mockProperty);
+      const response = await propertyAPI.getById(id);
+      
+      if (response.status === 'success' && response.data) {
+        // Transform backend data to match frontend format
+        const prop = response.data;
+        const transformedProperty = {
+          id: prop.property_id,
+          name: prop.title,
+          location: `Location ID: ${prop.location_id}`, // Will be enhanced with actual location data
+          area: `Property #${prop.property_id}`,
+          type: prop.property_type,
+          status: 'Available',
+          price: `₹${(prop.price / 100000).toFixed(2)}L`,
+          pricePerAcre: `₹${(prop.price / 100000).toFixed(2)}L`,
+          description: prop.description || 'Beautiful property with excellent features and location. Perfect for investment or personal use.',
+          features: [
+            'Prime location with excellent connectivity',
+            'Clear title and all approvals in place',
+            'Surrounded by developed infrastructure',
+            'Close to schools, hospitals, and shopping centers',
+            'Peaceful and serene environment',
+            'Investment potential with high appreciation'
+          ],
+          specifications: {
+            'Property ID': prop.property_id,
+            'Property Type': prop.property_type,
+            'Posted Date': new Date(prop.posted_date).toLocaleDateString('en-IN'),
+            'Price': `₹${prop.price.toLocaleString('en-IN')}`,
+            'Location ID': prop.location_id,
+          },
+          location_details: {
+            'Location ID': prop.location_id,
+            // These would come from a location lookup in a real app
+            'Distance to Airport': 'N/A',
+            'Distance to Railway Station': 'N/A',
+            'Distance to IT Hub': 'N/A',
+          },
+          images: [
+            '/api/placeholder/600/400',
+            '/api/placeholder/600/400',
+          ],
+          owner: {
+            name: 'Property Owner',
+            phone: '+91 9876543210',
+            email: 'owner@landwand.com'
+          },
+          lastUpdated: new Date(prop.posted_date).toLocaleDateString('en-IN'),
+          viewCount: Math.floor(Math.random() * 200) + 50,
+          inquiries: Math.floor(Math.random() * 30) + 5
+        };
+        
+        setProperty(transformedProperty);
+      } else {
+        setError('Property not found');
+      }
+      
       setLoading(false);
-    }, 1000);
+    } catch (err) {
+      console.error('Error fetching property:', err);
+      setError('Failed to load property details. Please ensure the backend server is running.');
+      setLoading(false);
+    }
+  };
+
+  // Fetch property on component mount or when id changes
+  useEffect(() => {
+    fetchProperty();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleInquiry = () => {
@@ -102,13 +118,25 @@ const Details = () => {
         <div className="text-center">
           <div className="text-6xl text-dark-text-muted mb-4">🏠</div>
           <h2 className="text-2xl font-bold text-dark-text mb-2">Property Not Found</h2>
-          <p className="text-dark-text-secondary mb-6">The property you're looking for doesn't exist or has been removed.</p>
-          <button
-            onClick={() => navigate('/dashboard')}
-            className="bg-gradient-to-r from-primary-500 to-accent-cyan text-white px-6 py-2 rounded-lg hover:from-primary-600 hover:to-primary-500 transition-all shadow-lg shadow-primary-500/20"
-          >
-            Back to Dashboard
-          </button>
+          <p className="text-dark-text-secondary mb-6">
+            {error || "The property you're looking for doesn't exist or has been removed."}
+          </p>
+          <div className="flex gap-4 justify-center">
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="bg-gradient-to-r from-primary-500 to-accent-cyan text-white px-6 py-2 rounded-lg hover:from-primary-600 hover:to-primary-500 transition-all shadow-lg shadow-primary-500/20"
+            >
+              Back to Dashboard
+            </button>
+            {error && (
+              <button
+                onClick={fetchProperty}
+                className="border border-primary-500 text-primary-400 px-6 py-2 rounded-lg hover:bg-primary-500/10 transition-colors"
+              >
+                Retry
+              </button>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -116,6 +144,22 @@ const Details = () => {
 
   return (
     <div className="min-h-screen bg-dark-bg">
+      {/* Error Banner */}
+      {error && property && (
+        <div className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 px-4 py-3 mx-4 mt-4 rounded-lg flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <span>⚠️</span>
+            <span>Showing cached data. {error}</span>
+          </div>
+          <button 
+            onClick={fetchProperty}
+            className="bg-yellow-500/20 hover:bg-yellow-500/30 px-3 py-1 rounded text-sm transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-dark-card shadow-sm border-b border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
